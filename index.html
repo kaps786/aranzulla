@@ -232,29 +232,6 @@
         <i class="fa-solid fa-wheelchair-move"></i>
     </div>
 
-    <!--
-    <script>
-        // Logica per avviare la chat Salesforce
-        function openSalesforceChat() {
-            try {
-                if (typeof embeddedservice_bootstrap !== 'undefined') {
-                    embeddedservice_bootstrap.utilAPI.launchChat();
-                } else {
-                    var sfButton = document.querySelector('#embeddedMessagingIconContainer button');
-                    if (sfButton) {
-                        sfButton.click();
-                    } else {
-                        console.log("Chat Salesforce non ancora caricata.");
-                        alert("Connessione all'assistente virtuale in corso, riprova tra un istante.");
-                    }
-                }
-            } catch (error) {
-                console.error("Errore nell'apertura della chat: ", error);
-            }
-        }
-    </script>
-    -->
-    
     <script type='text/javascript'>
         function initEmbeddedMessaging() {
             try {
@@ -276,17 +253,24 @@
     <script type='text/javascript' src='https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
     <script>
-        document.getElementById('agentforce-trigger').addEventListener('click', function() {
+        // Logica per avviare la chat Salesforce
+        function openSalesforceChat() {
             try {
-                // Tenta di aprire la chat usando l'API standard di Salesforce MIAW
-                embeddedservice_bootstrap.utilAPI.launchChat();
-            } catch (e) {
-                console.log("Chat API non ancora pronta o errore: " + e);
-                // Fallback: simula il click sul bottone nascosto (se esiste)
-                const sfButton = document.querySelector('.embeddedServiceHelpButton .uiButton');
-                if(sfButton) sfButton.click();
+                if (typeof embeddedservice_bootstrap !== 'undefined') {
+                    embeddedservice_bootstrap.utilAPI.launchChat();
+                } else {
+                    var sfButton = document.querySelector('#embeddedMessagingIconContainer button');
+                    if (sfButton) {
+                        sfButton.click();
+                    } else {
+                        console.log("Chat Salesforce non ancora caricata.");
+                        alert("Connessione all'assistente virtuale in corso, riprova tra un istante.");
+                    }
+                }
+            } catch (error) {
+                console.error("Errore nell'apertura della chat: ", error);
             }
-        });
+        }
     </script>
 
 </body>
