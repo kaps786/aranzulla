@@ -254,7 +254,7 @@
         }
     </script>
     -->
-
+    
     <script type='text/javascript'>
         function initEmbeddedMessaging() {
             try {
@@ -274,6 +274,20 @@
         };
     </script>
     <script type='text/javascript' src='https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+    <script>
+        document.getElementById('agentforce-trigger').addEventListener('click', function() {
+            try {
+                // Tenta di aprire la chat usando l'API standard di Salesforce MIAW
+                embeddedservice_bootstrap.utilAPI.launchChat();
+            } catch (e) {
+                console.log("Chat API non ancora pronta o errore: " + e);
+                // Fallback: simula il click sul bottone nascosto (se esiste)
+                const sfButton = document.querySelector('.embeddedServiceHelpButton .uiButton');
+                if(sfButton) sfButton.click();
+            }
+        });
+    </script>
 
 </body>
 </html>
