@@ -255,37 +255,30 @@
     <script type='text/javascript' src='https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
     <script>
-        // Logica per avviare la chat Salesforce
+        // Funzione per avviare la chat Salesforce
         function openSalesforceChat() {
+            console.log("Tentativo di apertura chat Salesforce...");
+            
             try {
+                // Controlla se le API della nuova chat (MIAW) sono caricate
                 if (typeof embeddedservice_bootstrap !== 'undefined') {
-                    embeddedservice_bootstrap.utilAPI.launchChat();
+                    console.log("API trovate. Lancio la chat...");
+                    embeddedservice_bootstrap.utilAPI.launchChat()
+                        .then(() => console.log("Chat aperta con successo."))
+                        .catch((err) => console.error("Errore nell'apertura della chat: ", err));
                 } else {
-                    var sfButton = document.querySelector('#embeddedMessagingIconContainer button');
-                    if (sfButton) {
-                        sfButton.click();
-                    } else {
-                        console.log("Chat Salesforce non ancora caricata.");
-                        alert("Connessione all'assistente virtuale in corso, riprova tra un istante.");
-                    }
+                    // Se non sono caricate, diamo un avviso all'utente
+                    console.warn("L'oggetto embeddedservice_bootstrap non è ancora definito.");
+                    alert("Il sistema di assistenza si sta connettendo. Attendi qualche secondo e riprova.");
                 }
             } catch (error) {
-                console.error("Errore nell'apertura della chat: ", error);
+                console.error("Errore critico durante l'esecuzione dello script: ", error);
             }
         }
-    </script>
 
-    <script>
-        document.getElementById('agentforce-trigger').addEventListener('click', function() {
-            try {
-                // Tenta di aprire la chat usando l'API standard di Salesforce MIAW
-                embeddedservice_bootstrap.utilAPI.launchChat();
-            } catch (e) {
-                console.log("Chat API non ancora pronta o errore: " + e);
-                // Fallback: simula il click sul bottone nascosto (se esiste)
-                const sfButton = document.querySelector('.embeddedServiceHelpButton .uiButton');
-                if(sfButton) sfButton.click();
-            }
+        // Aggiungi un listener per ascoltare quando Salesforce ha finito di caricare
+        window.addEventListener("onEmbeddedMessagingReady", () => {
+            console.log("Salesforce Messaging for Web è PRONTO e in ascolto!");
         });
     </script>
 
