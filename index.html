@@ -265,7 +265,10 @@
                     console.log("API trovate. Lancio la chat...");
                     embeddedservice_bootstrap.utilAPI.launchChat()
                         .then(() => console.log("Chat aperta con successo."))
-                        .catch((err) => console.error("Errore nell'apertura della chat: ", err));
+                        .catch((err) => {
+                            console.error("Errore nell'apertura della chat: ", err);
+                            alert("Si è verificato un problema nell'apertura della chat. Riprova più tardi.");
+                        });
                 } else {
                     // Se non sono caricate, diamo un avviso all'utente
                     console.warn("L'oggetto embeddedservice_bootstrap non è ancora definito.");
@@ -273,6 +276,7 @@
                 }
             } catch (error) {
                 console.error("Errore critico durante l'esecuzione dello script: ", error);
+                alert("Errore imprevisto. Contatta il supporto tecnico.");
             }
         }
 
