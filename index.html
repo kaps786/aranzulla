@@ -129,7 +129,7 @@
         .bottom-item i { font-size: 24px; }
         .bottom-item span { font-size: 13px; font-weight: 400; line-height: 1.4;}
 
-        /* --- BOTTONE WHATSAPP FAKE --- 
+        /* --- BOTTONE WHATSAPP FAKE --- */
         .whatsapp-float {
             position: fixed;
             width: 55px;
@@ -153,7 +153,6 @@
         .whatsapp-float:hover {
             transform: scale(1.05);
         }
-        */
 
         /* Icona accessibilità finta sotto WA */
         .accessibility-float {
@@ -174,103 +173,12 @@
             z-index: 999;
         }
 
-        /* BOTTONE WHATSAPP FLOTTANTE */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366; /* Verde ufficiale WhatsApp */
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 35px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-        }
-
-        .whatsapp-float:hover {
-            background-color: #128c7e;
-            transform: scale(1.1);
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        /* NASCONDE IL BOTTONE STANDARD DI SALESFORCE */
-
-        /* Per le versioni standard */
-        .embeddedServiceHelpButton,
-        .helpButton {
+        /* Nascondi il widget standard di Salesforce
+        #embeddedMessagingIconContainer, 
+        .embeddedMessagingIconContainer {
             display: none !important;
         }
-
-        /* Per le versioni web component (MIAW) */
-        embeddedservice-bootstrap-chat-launch-button {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
-        /* CONTAINER PER I BOTTONI */
-        .floating-contact-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column-reverse; /* Mette il primo elemento in basso */
-            gap: 15px; /* Spazio tra i bottoni */
-            z-index: 9999;
-        }
-
-        /* STILE GENERALE BOTTONI */
-        .float-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: white;
-            transition: transform 0.3s ease;
-            text-decoration: none; /* Per il link di whatsapp */
-        }
-
-        .float-btn:hover {
-            transform: scale(1.1); /* Ingrandisce leggermente al passaggio del mouse */
-        }
-
-        /* STILE SPECIFICO WHATSAPP */
-        .whatsapp-btn {
-            background-color: #25D366;
-        }
-
-        /* STILE SPECIFICO AGENTFORCE */
-        .agent-btn {
-            background-color: #0070d2; /* Blu Salesforce, o usa il verde del tuo brand */
-        }
-
-        /* Se usi l'immagine dentro il bottone Agentforce */
-        .agent-btn img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+        */
     </style>
 </head>
 <body>
@@ -317,82 +225,19 @@
         </div>
     </div>
 
-    <div id="embeddedMessagingIconContainer">
-        <div id="agentforce-trigger" class="whatsapp-float" title="Chatta con il supporto">
-            <i class="fa-brands fa-whatsapp"></i>
-        </div>
-            
-        <div class="accessibility-float">
-            <i class="fa-solid fa-wheelchair-move"></i>
-        </div>
-    </div>
+    <div class="floating-contact-container">
+        <!--
+        <a href="https://wa.me/39INSERISCI_QUI_IL_TUO_NUMERO" target="_blank" class="float-btn whatsapp-btn" title="Scrivici su WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
     
-    <!--
-    <script type='text/javascript'>
-        function initEmbeddedMessaging() {
-            try {
-                //embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-                embeddedservice_bootstrap.settings.language = 'it'; 
+        <button id="agentforce-trigger" class="float-btn agent-btn" title="Chatta con la nostra AI">
+            <i class="fas fa-robot"></i>
+        </button>
+        -->
+    </div>
 
-                embeddedservice_bootstrap.init(
-                    '00DHs00000T7y8g',
-                    'Agente_di_Supporto',
-                    'https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959',
-                    {
-                        scrt2URL: 'https://at1773661962975.my.salesforce-scrt.com'
-                    }
-                );
-                console.log('Embedded Messaging initialized successfully.');
-            } catch (err) {
-                console.error('Error loading Embedded Messaging: ', err);
-            }
-        };
-    </script>
-    <script type='text/javascript' src='https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
-    <script>
-        // Variabile per tracciare lo stato di caricamento di embeddedservice_bootstrap
-        let isEmbeddedServiceReady = false;
-
-        // Aggiungi un listener per sapere quando Salesforce ha finito di caricare
-        window.addEventListener("onEmbeddedMessagingReady", () => {
-            console.log("Salesforce Messaging for Web è PRONTO e in ascolto!");
-            isEmbeddedServiceReady = true;
-        });
-
-        // Funzione per avviare la chat Salesforce
-        function openSalesforceChat() {
-            console.log("Tentativo di apertura chat Salesforce...");
-            
-            try {
-                // Controlla se le API della nuova chat (MIAW) sono caricate e pronte
-                if (isEmbeddedServiceReady && typeof embeddedservice_bootstrap !== 'undefined') {
-                    console.log("API trovate e pronte. Lancio la chat...");
-                    embeddedservice_bootstrap.utilAPI.launchChat()
-                        .then(() => console.log("Chat aperta con successo."))
-                        .catch((err) => {
-                            console.error("Errore nell'apertura della chat: ", err);
-                            alert("Si è verificato un problema nell'apertura della chat. Riprova più tardi.");
-                        });
-                } else {
-                    // Se non sono pronte, avvisa l'utente
-                    console.warn("L'oggetto embeddedservice_bootstrap non è ancora definito o non è pronto.");
-                    alert("Il sistema di assistenza si sta connettendo. Attendi qualche secondo e riprova.");
-                }
-            } catch (error) {
-                console.error("Errore critico durante l'esecuzione dello script: ", error);
-                alert("Errore imprevisto. Contatta il supporto tecnico.");
-            }
-        }
-
-        // Aggiungi un listener per ascoltare quando Salesforce ha finito di caricare
-        window.addEventListener("onEmbeddedMessagingReady", () => {
-            console.log("Salesforce Messaging for Web è PRONTO e in ascolto!");
-        });
-    </script>
-    -->
-
-    <!-- CODICE AGGIORNATO CON NUOVO ORG E URL, MANTENENDO LA LOGICA DI CONTROLLO E FALLOBACK -->
     <script type='text/javascript'>
         function initEmbeddedMessaging() {
             try {
