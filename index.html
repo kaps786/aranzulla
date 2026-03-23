@@ -255,14 +255,23 @@
     <script type='text/javascript' src='https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
     <script>
+        // Variabile per tracciare lo stato di caricamento di embeddedservice_bootstrap
+        let isEmbeddedServiceReady = false;
+
+        // Aggiungi un listener per sapere quando Salesforce ha finito di caricare
+        window.addEventListener("onEmbeddedMessagingReady", () => {
+            console.log("Salesforce Messaging for Web è PRONTO e in ascolto!");
+            isEmbeddedServiceReady = true;
+        });
+
         // Funzione per avviare la chat Salesforce
         function openSalesforceChat() {
             console.log("Tentativo di apertura chat Salesforce...");
             
             try {
-                // Controlla se le API della nuova chat (MIAW) sono caricate
-                if (typeof embeddedservice_bootstrap !== 'undefined') {
-                    console.log("API trovate. Lancio la chat...");
+                // Controlla se le API della nuova chat (MIAW) sono caricate e pronte
+                if (isEmbeddedServiceReady && typeof embeddedservice_bootstrap !== 'undefined') {
+                    console.log("API trovate e pronte. Lancio la chat...");
                     embeddedservice_bootstrap.utilAPI.launchChat()
                         .then(() => console.log("Chat aperta con successo."))
                         .catch((err) => {
@@ -270,8 +279,8 @@
                             alert("Si è verificato un problema nell'apertura della chat. Riprova più tardi.");
                         });
                 } else {
-                    // Se non sono caricate, diamo un avviso all'utente
-                    console.warn("L'oggetto embeddedservice_bootstrap non è ancora definito.");
+                    // Se non sono pronte, avvisa l'utente
+                    console.warn("L'oggetto embeddedservice_bootstrap non è ancora definito o non è pronto.");
                     alert("Il sistema di assistenza si sta connettendo. Attendi qualche secondo e riprova.");
                 }
             } catch (error) {
