@@ -232,6 +232,7 @@
         <i class="fa-solid fa-wheelchair-move"></i>
     </div>
 
+    <!--
     <script type='text/javascript'>
         function initEmbeddedMessaging() {
             try {
@@ -292,6 +293,42 @@
         // Aggiungi un listener per ascoltare quando Salesforce ha finito di caricare
         window.addEventListener("onEmbeddedMessagingReady", () => {
             console.log("Salesforce Messaging for Web è PRONTO e in ascolto!");
+        });
+    </script>
+    -->
+
+    <!-- CODICE AGGIORNATO CON NUOVO ORG E URL, MANTENENDO LA LOGICA DI CONTROLLO E FALLOBACK -->
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'it'; 
+
+                embeddedservice_bootstrap.init(
+                    '00DHu00000uSpSk',
+                    'MustEnergiaChat',
+                    'https://at1766405648944.my.site.com/ESWMustEnergiaChat1767608257336',
+                    {
+                        scrt2URL: 'https://at1766405648944.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
+    </script>
+    <script type='text/javascript' src='https://at1766405648944.my.site.com/ESWMustEnergiaChat1767608257336/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+    <script>
+        document.getElementById('agentforce-trigger').addEventListener('click', function() {
+            try {
+                // Tenta di aprire la chat usando l'API standard di Salesforce MIAW
+                embeddedservice_bootstrap.utilAPI.launchChat();
+            } catch (e) {
+                console.log("Chat API non ancora pronta o errore: " + e);
+                // Fallback: simula il click sul bottone nascosto (se esiste)
+                const sfButton = document.querySelector('.embeddedServiceHelpButton .uiButton');
+                if(sfButton) sfButton.click();
+            }
         });
     </script>
 
