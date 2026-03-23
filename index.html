@@ -232,6 +232,7 @@
         <i class="fa-solid fa-wheelchair-move"></i>
     </div>
 
+    <!--
     <script>
         // Logica per avviare la chat Salesforce
         function openSalesforceChat() {
@@ -252,6 +253,27 @@
             }
         }
     </script>
+    -->
+
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+                embeddedservice_bootstrap.init(
+                    '00DHs00000T7y8g',
+                    'Agente_di_Supporto',
+                    'https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959',
+                    {
+                        scrt2URL: 'https://at1773661962975.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
+    </script>
+    <script type='text/javascript' src='https://at1773661962975.my.site.com/ESWAgentediSupporto1773747769959/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
 </body>
 </html>
