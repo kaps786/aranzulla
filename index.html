@@ -239,24 +239,24 @@
 
 
     <script type='text/javascript'>
-    	function initEmbeddedMessaging() {
-    		try {
-    			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-    
-    			embeddedservice_bootstrap.init(
-    				'00DHu00000uSpSk',
-    				'ServiceAgentChat',
-    				'https://at1766405648944.my.site.com/ESWServiceAgentChat1777027888880',
-    				{
-    					scrt2URL: 'https://at1766405648944.my.salesforce-scrt.com'
-    				}
-    			);
-    		} catch (err) {
-    			console.error('Error loading Embedded Messaging: ', err);
-    		}
-    	};
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'it'; 
+
+                embeddedservice_bootstrap.init(
+                    '00DHu00000uSpSk',
+                    'MustEnergiaChat',
+                    'https://at1766405648944.my.site.com/ESWMustEnergiaChat1767608257336',
+                    {
+                        scrt2URL: 'https://at1766405648944.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
     </script>
-    <script type='text/javascript' src='https://at1766405648944.my.site.com/ESWServiceAgentChat1777027888880/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+    <script type='text/javascript' src='https://at1766405648944.my.site.com/ESWMustEnergiaChat1767608257336/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
     <script>
         document.getElementById('agentforce-trigger').addEventListener('click', function() {
