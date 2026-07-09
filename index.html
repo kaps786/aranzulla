@@ -314,22 +314,16 @@
     </button>
 
     <script type='text/javascript'>
-        // =====================================================================
-        // ATTENZIONE: valori PLACEHOLDER da sostituire con quelli reali del tuo
-        // Embedded Messaging Deployment configurato su smbdemo2 per l'agente
-        // "Fadda Sales Assistant". Vanno presi da Setup > Embedded Service Deployments.
-        // Finche' non li sostituisci, il bottone non aprira' nessuna chat reale.
-        // =====================================================================
         function initEmbeddedMessaging() {
             try {
-                embeddedservice_bootstrap.settings.language = 'it';
+                embeddedservice_bootstrap.settings.language = 'it'; 
 
                 embeddedservice_bootstrap.init(
-                    'INSERISCI_ORG_ID',            // es. 00DHu00000uSpSk
-                    'INSERISCI_NOME_DEPLOYMENT',   // es. FaddaSalesAssistantChat
-                    'INSERISCI_SITE_URL',          // es. https://xxxxx.my.site.com/ESWFaddaXXXX
+                    '00DHu00000uSpSk',
+                    'MustEnergiaChat',
+                    'https://at1766405648944.my.site.com/ESWMustEnergiaChat1767608257336',
                     {
-                        scrt2URL: 'INSERISCI_SCRT2_URL' // es. https://xxxxx.my.salesforce-scrt.com
+                        scrt2URL: 'https://at1766405648944.my.salesforce-scrt.com'
                     }
                 );
             } catch (err) {
@@ -337,17 +331,18 @@
             }
         };
     </script>
-    <!-- Sostituisci anche questo src con l'URL del bootstrap.min.js del tuo deployment -->
-    <script type='text/javascript' src='INSERISCI_URL_BOOTSTRAP_JS' onload='initEmbeddedMessaging()'></script>
+    <script type='text/javascript' src='https://at1766405648944.my.site.com/ESWMustEnergiaChat1767608257336/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
     <script>
         document.getElementById('agentforce-trigger').addEventListener('click', function() {
             try {
+                // Tenta di aprire la chat usando l'API standard di Salesforce MIAW
                 embeddedservice_bootstrap.utilAPI.launchChat();
             } catch (e) {
                 console.log("Chat API non ancora pronta o errore: " + e);
+                // Fallback: simula il click sul bottone nascosto (se esiste)
                 const sfButton = document.querySelector('.embeddedServiceHelpButton .uiButton');
-                if (sfButton) sfButton.click();
+                if(sfButton) sfButton.click();
             }
         });
     </script>
